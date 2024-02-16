@@ -1,10 +1,13 @@
 import "./App.css";
+import { ThemeConfig } from "./config/them.config";
 import HomePage from "./pages/home";
 
 function App() {
   return (
     <>
-      <HomePage />
+      <ThemeConfig>
+        <HomePage />
+      </ThemeConfig>
     </>
   );
 }
