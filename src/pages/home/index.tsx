@@ -7,6 +7,7 @@ import {
   CircularProgress,
   Container,
   Grid,
+  Pagination,
   Typography,
 } from "@mui/material";
 import { TypeCharacter } from "./interface/characters.interface";
@@ -16,12 +17,15 @@ const HomePage = () => {
     TypeCharacter[] | null
   >(null);
   const [loading, setLoading] = React.useState<boolean>(true);
+  const [page, setPage] = React.useState(1);
+  const [count, setCount] = React.useState(1);
 
   React.useEffect(() => {
     setLoading(true);
     characters
-      .getAll({ page: 1 })
+      .getAll({ page: page })
       .then((r) => {
+        setCount(r.data.info.pages);
         setAllcharacters(r.data.results);
         console.log(r.data.results);
         setTimeout(() => setLoading(false), 1000);
@@ -29,7 +33,11 @@ const HomePage = () => {
       .catch((e) => {
         console.log(e);
       });
-  }, []);
+  }, [page]);
+
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
 
   return (
     <>
@@ -37,7 +45,7 @@ const HomePage = () => {
       <Box sx={{ display: "flex", mt: 2, mb: 2, justifyContent: "center" }}>
         <Typography variant="h1">Personajes</Typography>
       </Box>
-      <Container maxWidth="xl">
+      <Container sx={{ paddingBottom: "50px" }} maxWidth="xl">
         {loading ? (
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <CircularProgress />
@@ -55,6 +63,7 @@ const HomePage = () => {
                       gender={character.gender}
                       species={character.species}
                       status={character.status}
+                      id={character.id}
                     />
                   </Grid>
                 ))}
@@ -62,6 +71,22 @@ const HomePage = () => {
             ) : (
               <div>No existe data</div>
             )}
+            <Box
+              sx={{
+                paddingTop: "50px",
+                display: "flex",
+                justifyContent: "center",
+                mt: 2,
+              }}
+            >
+              <Pagination
+                variant="outlined"
+                color="primary"
+                count={count}
+                page={page}
+                onChange={handleChange}
+              />
+            </Box>
           </Box>
         )}
       </Container>

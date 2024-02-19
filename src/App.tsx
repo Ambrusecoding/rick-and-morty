@@ -1,13 +1,16 @@
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import { ThemeConfig } from "./config/them.config";
-import HomePage from "./pages/home";
+import AppRouter from "./Router";
 
 function App() {
   return (
     <>
-      <ThemeConfig>
-        <HomePage />
-      </ThemeConfig>
+      <BrowserRouter>
+        <ThemeConfig>
+          <AppRouter />
+        </ThemeConfig>
+      </BrowserRouter>
     </>
   );
 }
