@@ -8,7 +8,9 @@ import {
   Container,
   Grid,
   Pagination,
+  Theme,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { TypeCharacter } from "./interface/characters.interface";
 
@@ -27,7 +29,6 @@ const HomePage = () => {
       .then((r) => {
         setCount(r.data.info.pages);
         setAllcharacters(r.data.results);
-        console.log(r.data.results);
         setTimeout(() => setLoading(false), 1000);
       })
       .catch((e) => {
@@ -39,11 +40,13 @@ const HomePage = () => {
     setPage(value);
   };
 
+  const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
+
   return (
     <>
       <Navbar />
       <Box sx={{ display: "flex", mt: 2, mb: 2, justifyContent: "center" }}>
-        <Typography variant="h1">Personajes</Typography>
+        <Typography variant={matches ? "h4" : "h1"}>Personajes</Typography>
       </Box>
       <Container sx={{ paddingBottom: "50px" }} maxWidth="xl">
         {loading ? (

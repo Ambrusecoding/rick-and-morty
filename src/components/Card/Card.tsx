@@ -9,9 +9,12 @@ import {
   CardContent,
   CardMedia,
   Divider,
+  Theme,
   Tooltip,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 type CardProps = {
   name: string;
@@ -19,6 +22,7 @@ type CardProps = {
   gender: string;
   species: string;
   status: string;
+  id: number;
 };
 
 export const CardComponent: React.FC<CardProps> = ({
@@ -27,12 +31,15 @@ export const CardComponent: React.FC<CardProps> = ({
   species,
   status,
   gender,
+  id,
 }) => {
+  const navigate = useNavigate();
+  const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
   return (
     <Card>
       <CardMedia component="img" height="194" image={image} alt="Paella dish" />
       <CardContent>
-        <Typography variant="h4">{name}</Typography>
+        <Typography variant={matches ? "h5" : "h4"}>{name}</Typography>
         <Divider sx={{ mt: 2 }} />
         <Typography sx={{ mt: 2 }} variant="body2" color="text.secondary">
           <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -56,7 +63,12 @@ export const CardComponent: React.FC<CardProps> = ({
         </Typography>
       </CardContent>
       <CardActions>
-        <Button fullWidth variant="contained" size="small">
+        <Button
+          onClick={() => navigate(`/characters/${id}`)}
+          fullWidth
+          variant="contained"
+          size="small"
+        >
           Más información
         </Button>
       </CardActions>
