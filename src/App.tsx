@@ -6,11 +6,11 @@ import AppRouter from "./Router";
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <ThemeConfig>
+      <ThemeConfig>
+        <BrowserRouter>
           <AppRouter />
-        </ThemeConfig>
-      </BrowserRouter>
+        </BrowserRouter>
+      </ThemeConfig>
     </>
   );
 }

@@ -45,11 +45,11 @@ export const CardComponent: React.FC<CardProps> = ({
           <Box sx={{ display: "flex", alignItems: "center" }}>
             Genero :{" "}
             {gender == "Male" ? (
-              <Tooltip TransitionComponent={Zoom} title="Masculino">
+              <Tooltip TransitionComponent={Zoom} title={gender}>
                 <MaleIcon />
               </Tooltip>
             ) : (
-              <Tooltip TransitionComponent={Zoom} title="Femenino">
+              <Tooltip TransitionComponent={Zoom} title={gender}>
                 <FemaleIcon />
               </Tooltip>
             )}

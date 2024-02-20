@@ -1,7 +1,6 @@
 import React from "react";
 import { characters } from "../../api/characters";
-import Navbar from "../../components/Navbar";
-import { CardComponent } from "../../components/Card/Card";
+import { CardComponent } from "../../components/CardCharacter/Card";
 import {
   Box,
   CircularProgress,
@@ -13,6 +12,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { TypeCharacter } from "./interface/characters.interface";
+import SearchBar from "../../components/SearchBar";
 
 const HomePage = () => {
   const [allCharacters, setAllcharacters] = React.useState<
@@ -21,11 +21,23 @@ const HomePage = () => {
   const [loading, setLoading] = React.useState<boolean>(true);
   const [page, setPage] = React.useState(1);
   const [count, setCount] = React.useState(1);
+  const [filter, setFilter] = React.useState({
+    name: "",
+    status: "",
+    species: "",
+    gender: "",
+  });
 
   React.useEffect(() => {
     setLoading(true);
     characters
-      .getAll({ page: page })
+      .getAll({
+        page: page,
+        status: filter.status,
+        name: filter.name,
+        species: filter.species,
+        gender: filter.gender,
+      })
       .then((r) => {
         setCount(r.data.info.pages);
         setAllcharacters(r.data.results);
@@ -34,9 +46,9 @@ const HomePage = () => {
       .catch((e) => {
         console.log(e);
       });
-  }, [page]);
+  }, [page, filter]);
 
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 
@@ -44,10 +56,10 @@ const HomePage = () => {
 
   return (
     <>
-      <Navbar />
       <Box sx={{ display: "flex", mt: 2, mb: 2, justifyContent: "center" }}>
         <Typography variant={matches ? "h4" : "h1"}>Personajes</Typography>
       </Box>
+      <SearchBar setFilter={setFilter} />
       <Container sx={{ paddingBottom: "50px" }} maxWidth="xl">
         {loading ? (
           <Box sx={{ display: "flex", justifyContent: "center" }}>
