@@ -13,7 +13,7 @@ const CharacterPage: React.FC = () => {
     characters
       .getById({ id })
       .then((r) => {
-        setCharacter(r.data);
+        setCharacter(r);
         setTimeout(() => setLoading(false), 1000);
       })
       .catch((e) => console.log(e));
@@ -74,6 +74,21 @@ const CharacterPage: React.FC = () => {
             <p>Tipo {character?.type}</p>
             <p>Genero: {character?.gender}</p>
             <p>Origen: {character?.origin.name}</p>
+            <p style={{ fontWeight: "bold" }}> Apariciones:</p>
+            <ol
+              style={{
+                marginTop: "10px",
+                height: "200px",
+                overflow: "auto",
+                border: "1px solid",
+                padding: " 0px 30px",
+                borderRadius: "10px",
+              }}
+            >
+              {character?.episodes?.map((episode) => (
+                <li key={episode.id}>{episode.name}</li>
+              ))}
+            </ol>
           </Box>
         </Container>
       )}

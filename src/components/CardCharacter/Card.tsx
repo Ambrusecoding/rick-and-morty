@@ -45,6 +45,7 @@ export const CardComponent: React.FC<CardProps> = ({
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
+        paddingBottom: "20px",
       }}
     >
       <CardMedia
@@ -90,10 +91,11 @@ export const CardComponent: React.FC<CardProps> = ({
       </CardContent>
       <CardActions>
         <Button
+          sx={{ margin: "auto", width: "80%" }}
           onClick={() => navigate(`/characters/${id}`)}
           fullWidth
           variant="contained"
-          size="small"
+          size="large"
         >
           Más información
         </Button>
