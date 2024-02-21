@@ -1,6 +1,9 @@
 import FemaleIcon from "@mui/icons-material/Female";
 import MaleIcon from "@mui/icons-material/Male";
 import Zoom from "@mui/material/Zoom";
+import NoAccountsIcon from "@mui/icons-material/NoAccounts";
+import BlockIcon from "@mui/icons-material/Block";
+
 import {
   Box,
   Button,
@@ -36,21 +39,44 @@ export const CardComponent: React.FC<CardProps> = ({
   const navigate = useNavigate();
   const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
   return (
-    <Card>
-      <CardMedia component="img" height="194" image={image} alt="Paella dish" />
+    <Card
+      sx={{
+        minHeight: "680px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}
+    >
+      <CardMedia
+        sx={{
+          minHeight: "340px",
+        }}
+        component="img"
+        height="194"
+        image={image}
+        alt="Paella dish"
+      />
       <CardContent>
         <Typography variant={matches ? "h5" : "h4"}>{name}</Typography>
         <Divider sx={{ mt: 2 }} />
         <Typography sx={{ mt: 2 }} variant="body2" color="text.secondary">
           <Box sx={{ display: "flex", alignItems: "center" }}>
             Genero :{" "}
-            {gender == "Male" ? (
+            {gender === "Female" ? (
+              <Tooltip TransitionComponent={Zoom} title={gender}>
+                <FemaleIcon />
+              </Tooltip>
+            ) : gender === "Male" ? (
               <Tooltip TransitionComponent={Zoom} title={gender}>
                 <MaleIcon />
               </Tooltip>
+            ) : gender === "Genderless" ? (
+              <Tooltip TransitionComponent={Zoom} title={gender}>
+                <BlockIcon />
+              </Tooltip>
             ) : (
               <Tooltip TransitionComponent={Zoom} title={gender}>
-                <FemaleIcon />
+                <NoAccountsIcon />
               </Tooltip>
             )}
           </Box>
