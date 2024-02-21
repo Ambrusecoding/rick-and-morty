@@ -4,14 +4,14 @@ import { characters } from "../../api/characters";
 import { ICharacter } from "./interface/character.interface";
 import { Box, CircularProgress, Container } from "@mui/material";
 
-const CharacterPage: React.FC = () => {
+const CharacterComponent: React.FC = () => {
   const { id } = useParams();
   const [loading, setLoading] = React.useState<boolean>(true);
   const [character, setCharacter] = React.useState<ICharacter | null>(null);
   React.useEffect(() => {
     setLoading(true);
     characters
-      .getById({ id })
+      .getByIdCharacters({ id })
       .then((r) => {
         setCharacter(r);
         setTimeout(() => setLoading(false), 1000);
@@ -95,4 +95,4 @@ const CharacterPage: React.FC = () => {
     </Container>
   );
 };
-export default CharacterPage;
+export default CharacterComponent;
