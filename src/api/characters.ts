@@ -3,7 +3,7 @@ import { instance } from "./base.api";
 const endpoint = "character";
 
 export const characters = {
-  getAll: function ({
+  getAllCharacters: function ({
     page,
     status,
     name,
@@ -27,7 +27,7 @@ export const characters = {
     });
   },
   //populate the character with the episodes
-  getById: async function ({ id }: { id: string | undefined }) {
+  getByIdCharacters: async function ({ id }: { id: string | undefined }) {
     try {
       const res = await instance.get(`${endpoint}/${id}`);
       const characterDemo = res.data as ICharacter;

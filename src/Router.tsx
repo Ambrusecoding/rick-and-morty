@@ -1,16 +1,15 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import HomePage from "./pages/home/index";
-import CharacterPage from "./pages/characters/index";
-import Episodes from "./pages/episodes";
+import CharacterComponent from "./pages/characters/index";
 import RouterLayout from "./common/RouterLayout";
+import BasicTabs from "./pages/testTab";
 const AppRouter: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<RouterLayout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/characters/:id" element={<CharacterPage />} />
-        <Route path="/episodes" element={<Episodes />} />
+        <Route path="/" element={<BasicTabs value={0} />} />
+        <Route path="/characters/:id" element={<CharacterComponent />} />
+        <Route path="/episodes" element={<BasicTabs value={1} />} />
       </Route>
     </Routes>
   );

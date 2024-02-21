@@ -31,7 +31,7 @@ const HomePage = () => {
   React.useEffect(() => {
     setLoading(true);
     characters
-      .getAll({
+      .getAllCharacters({
         page: page,
         status: filter.status,
         name: filter.name,
@@ -59,7 +59,9 @@ const HomePage = () => {
       <Box sx={{ display: "flex", mt: 2, mb: 2, justifyContent: "center" }}>
         <Typography variant={matches ? "h4" : "h1"}>Personajes</Typography>
       </Box>
-      <SearchBar setFilter={setFilter} />
+      <Container sx={{ paddingBottom: "50px" }} maxWidth="xl">
+        <SearchBar setFilter={setFilter} />
+      </Container>
       <Container sx={{ paddingBottom: "50px" }} maxWidth="xl">
         {loading ? (
           <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -72,7 +74,6 @@ const HomePage = () => {
                 {allCharacters?.map((character) => (
                   <Grid item xs={12} sm={6} md={4} lg={3} key={character.id}>
                     <CardComponent
-                      key={character.id}
                       name={character.name}
                       image={character.image}
                       gender={character.gender}

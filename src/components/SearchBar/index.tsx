@@ -1,5 +1,6 @@
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import { Box } from "@mui/material";
 
 interface SearchBarProps {
   setFilter: React.Dispatch<
@@ -37,8 +38,19 @@ const SearchBar = ({ setFilter }: SearchBarProps) => {
   };
 
   return (
-    <div>
-      <input onChange={handleNameFilter} type="text" />
+    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <TextField
+        onChange={handleNameFilter}
+        id="standard-basic"
+        label="Nombre del personaje"
+        variant="standard"
+      />
+      <TextField
+        onChange={handleSpecieFilter}
+        id="standard-basic"
+        label="Especie del personaje"
+        variant="standard"
+      />
       <Autocomplete
         onChange={handleStatusFilter}
         disablePortal
@@ -47,7 +59,7 @@ const SearchBar = ({ setFilter }: SearchBarProps) => {
         sx={{ width: 300 }}
         renderInput={(params) => <TextField {...params} label="Estado" />}
       />
-      <input onChange={handleSpecieFilter} type="text" />
+
       <Autocomplete
         onChange={handleGenderFilter}
         disablePortal
@@ -56,7 +68,7 @@ const SearchBar = ({ setFilter }: SearchBarProps) => {
         sx={{ width: 300 }}
         renderInput={(params) => <TextField {...params} label="Genero" />}
       />
-    </div>
+    </Box>
   );
 };
 const statusOptions = ["Alive", "Dead", "unknown"];
