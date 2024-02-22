@@ -3,6 +3,7 @@ import MaleIcon from "@mui/icons-material/Male";
 import Zoom from "@mui/material/Zoom";
 import NoAccountsIcon from "@mui/icons-material/NoAccounts";
 import BlockIcon from "@mui/icons-material/Block";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import {
   Box,
@@ -18,6 +19,10 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addFavoriteCharacter } from "../../redux/slices/character.slice";
+import React from "react";
+import { useAppSelector } from "../../redux/hooks";
 
 type CardProps = {
   name: string;
@@ -36,11 +41,22 @@ export const CardComponent: React.FC<CardProps> = ({
   gender,
   id,
 }) => {
+  const [disableBtn, setDisableBtn] = React.useState(false);
   const navigate = useNavigate();
   const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
+  const dispatch = useDispatch();
+
+  const itemExist = useAppSelector((state) => state.favoriteReducer);
+  React.useEffect(() => {
+    setDisableBtn(itemExist.some((item) => item.id === id));
+  }, [itemExist, id]);
+  const handleAddFavorite = () => {
+    dispatch(addFavoriteCharacter({ id, name, info: status, image }));
+  };
   return (
     <Card
       sx={{
+        borderRadius: "20px",
         minHeight: "680px",
         display: "flex",
         flexDirection: "column",
@@ -61,25 +77,40 @@ export const CardComponent: React.FC<CardProps> = ({
         <Typography variant={matches ? "h5" : "h4"}>{name}</Typography>
         <Divider sx={{ mt: 2 }} />
         <Typography sx={{ mt: 2 }} variant="body2" color="text.secondary">
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            Genero :{" "}
-            {gender === "Female" ? (
-              <Tooltip TransitionComponent={Zoom} title={gender}>
-                <FemaleIcon />
-              </Tooltip>
-            ) : gender === "Male" ? (
-              <Tooltip TransitionComponent={Zoom} title={gender}>
-                <MaleIcon />
-              </Tooltip>
-            ) : gender === "Genderless" ? (
-              <Tooltip TransitionComponent={Zoom} title={gender}>
-                <BlockIcon />
-              </Tooltip>
-            ) : (
-              <Tooltip TransitionComponent={Zoom} title={gender}>
-                <NoAccountsIcon />
-              </Tooltip>
-            )}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              paddingRight: "20px",
+            }}
+          >
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              Genero :{" "}
+              {gender === "Female" ? (
+                <Tooltip TransitionComponent={Zoom} title={gender}>
+                  <FemaleIcon />
+                </Tooltip>
+              ) : gender === "Male" ? (
+                <Tooltip TransitionComponent={Zoom} title={gender}>
+                  <MaleIcon />
+                </Tooltip>
+              ) : gender === "Genderless" ? (
+                <Tooltip TransitionComponent={Zoom} title={gender}>
+                  <BlockIcon />
+                </Tooltip>
+              ) : (
+                <Tooltip TransitionComponent={Zoom} title={gender}>
+                  <NoAccountsIcon />
+                </Tooltip>
+              )}
+            </Box>
+            <Box>
+              <Button onClick={handleAddFavorite} disabled={disableBtn}>
+                <Tooltip TransitionComponent={Zoom} title="Agregar a Favoritos">
+                  <FavoriteIcon color={disableBtn ? "error" : "action"} />
+                </Tooltip>
+              </Button>
+            </Box>
           </Box>
         </Typography>
         <Typography sx={{ mt: 2 }} variant="body2" color="text.secondary">
