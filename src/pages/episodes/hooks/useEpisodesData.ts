@@ -22,9 +22,10 @@ function useEpisodeData() {
         name: "",
         airdate: "",
       })
-      .then((r) => {
-        setCount(r.data.info.pages);
-        setAllEpisodes(EpisodeGetAllAdapter(r.data.results));
+      .then((result) => {
+        setCount(result.data.info.pages);
+        const adaptedData = EpisodeGetAllAdapter(result.data.results);
+        setAllEpisodes(adaptedData);
         setTimeout(() => setLoading(false), 1000);
       })
       .catch((e) => {

@@ -21,16 +21,16 @@ export const FavoriteComponent: React.FC<FavoriteComponentProps> = ({
   handleStateViewDrawer,
 }) => {
   const items = useAppSelector((state) => state.favoriteReducer);
-
+  const textfavorite = "Personajes Favoritos";
   return (
-    <Drawer anchor={"right"} open={open}>
+    <Drawer anchor="right" open={open}>
       <Box sx={{ width: "25em", p: 2 }}>
         <Stack
           direction="row"
           justifyContent="space-between"
           alignItems="center"
         >
-          <Typography variant="h5">Personajes Favoritos</Typography>
+          <Typography variant="h5">{textfavorite}</Typography>
           <IconButton color="primary" onClick={() => handleStateViewDrawer()}>
             <CloseRoundedIcon />
           </IconButton>

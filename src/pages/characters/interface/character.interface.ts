@@ -1,4 +1,4 @@
-import { TypeEpisode } from "../../episodes/interface";
+import { TypeEpisodeDOM } from "../../episodes/interface";
 export interface ICharacter {
   id: number;
   name: string;
@@ -12,7 +12,7 @@ export interface ICharacter {
   episode: string[];
   url: string;
   created: Date;
-  episodes?: TypeEpisode[];
+  episodes?: TypeEpisodeDOM[];
 }
 
 export interface Location {

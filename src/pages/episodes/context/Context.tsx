@@ -1,10 +1,10 @@
 import { createContext } from "react";
-import { TypeEpisode } from "../interface";
+import { TypeEpisodeDOM } from "../interface";
 // Crear el contexto
 
 interface EpisodeContextState {
-  allEpisodes: TypeEpisode[];
-  setAllEpisodes: (value: TypeEpisode[]) => void;
+  allEpisodes: TypeEpisodeDOM[];
+  setAllEpisodes: (value: TypeEpisodeDOM[]) => void;
   loading: boolean;
   setLoading: (value: boolean) => void;
   page: number;

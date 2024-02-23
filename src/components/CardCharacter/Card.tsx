@@ -21,7 +21,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addFavoriteCharacter } from "../../redux/slices/character.slice";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../../redux/hooks";
 
 type CardProps = {
@@ -41,13 +41,14 @@ export const CardComponent: React.FC<CardProps> = ({
   gender,
   id,
 }) => {
-  const [disableBtn, setDisableBtn] = React.useState(false);
+  const [disableBtn, setDisableBtn] = useState(false);
   const navigate = useNavigate();
   const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
   const dispatch = useDispatch();
 
   const itemExist = useAppSelector((state) => state.favoriteReducer);
-  React.useEffect(() => {
+  /*Probé eliminarlo pero el botón quedaba en rojo  */
+  useEffect(() => {
     setDisableBtn(itemExist.some((item) => item.id === id));
   }, [itemExist, id]);
   const handleAddFavorite = () => {
@@ -87,6 +88,7 @@ export const CardComponent: React.FC<CardProps> = ({
             <Box sx={{ display: "flex", alignItems: "center" }}>
               Genero :{" "}
               {gender === "Female" ? (
+                //Cambio pendiente
                 <Tooltip TransitionComponent={Zoom} title={gender}>
                   <FemaleIcon />
                 </Tooltip>

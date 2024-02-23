@@ -1,6 +1,8 @@
-import { TypeEpisode, TypeEpisodeApi } from "../interface";
+import { TypeEpisodeDOM, TypeEpisodeApi } from "../interface";
 
-export const EpisodeGetAllAdapter = (data: TypeEpisodeApi[]): TypeEpisode[] => {
+export const EpisodeGetAllAdapter = (
+  data: TypeEpisodeApi[]
+): TypeEpisodeDOM[] => {
   return data.map((episode) => {
     return {
       id: episode.id,

@@ -1,4 +1,4 @@
-export interface TypeEpisode {
+export interface TypeEpisodeDOM {
   id: number;
   name: string;
   airDate: string;
