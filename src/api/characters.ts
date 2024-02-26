@@ -26,6 +26,7 @@ export const characters = {
       },
     });
   },
+
   //populate the character with the episodes
   getByIdCharacters: async function ({ id }: { id: string | undefined }) {
     try {
@@ -36,6 +37,7 @@ export const characters = {
       ) as string[];
       const episodes = await Promise.all(
         episodeIds.map((episodeId: string) =>
+          //suprimir then y usar await
           instance.get(`episode/${episodeId}`).then((r) => r.data)
         )
       );

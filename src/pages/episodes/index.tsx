@@ -1,5 +1,4 @@
 import React from "react";
-import { episodes } from "../../api/episode";
 import {
   Box,
   CircularProgress,
@@ -7,34 +6,12 @@ import {
   Grid,
   Pagination,
 } from "@mui/material";
-import { TypeEpisode } from "./interface";
 import { CardEpisode } from "../../components/CardEpisode/CardEpisode";
 
-const EpisodesComponent = () => {
-  const [allEpisodes, setAllEpisodes] = React.useState<TypeEpisode[] | null>(
-    null
-  );
-  const [loading, setLoading] = React.useState(true);
-  const [page, setPage] = React.useState(1);
-  const [count, setCount] = React.useState(1);
+import useEpisodeData from "./hooks/useEpisodesData";
 
-  React.useEffect(() => {
-    setLoading(true);
-    episodes
-      .getEpisode({
-        page: page,
-        name: "",
-        airdate: "",
-      })
-      .then((r) => {
-        setCount(r.data.info.pages);
-        setAllEpisodes(r.data.results);
-        setTimeout(() => setLoading(false), 1000);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, [page]);
+const Episodes = () => {
+  const { allEpisodes, loading, page, count, setPage } = useEpisodeData();
 
   const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
@@ -55,7 +32,7 @@ const EpisodesComponent = () => {
                   <CardEpisode
                     key={episodes.id}
                     name={episodes.name}
-                    airdate={episodes.airdate}
+                    airdate={episodes.airDate}
                     episode={episodes.episode}
                     created={episodes.created}
                   />
@@ -86,4 +63,4 @@ const EpisodesComponent = () => {
     </Container>
   );
 };
-export default EpisodesComponent;
+export default Episodes;
