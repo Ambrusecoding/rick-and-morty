@@ -13,7 +13,8 @@ interface RemoveFavoriteState {
 }
 
 // Define the initial state using that type
-const initialState: FavoriteState[] = [];
+const initialState: FavoriteState[] =
+  JSON.parse(localStorage.getItem("favoriteCharacters") ?? "") || [];
 
 export const favoriteCharacter = createSlice({
   name: "favorite",
@@ -28,8 +29,10 @@ export const favoriteCharacter = createSlice({
       ) {
         state.push(action.payload);
       }
+      // Guarda los datos en el localStorage después de actualizar el estado
+      localStorage.setItem("favoriteCharacters", JSON.stringify(state));
     },
-    removeFavoriteCharacter: (
+    /* removeFavoriteCharacter: (
       state,
       action: PayloadAction<RemoveFavoriteState>
     ) => {
@@ -38,6 +41,40 @@ export const favoriteCharacter = createSlice({
       if (state.some((item) => item.id === id)) {
         return (state = state.filter((item) => item.id !== id));
       }
+      // Guarda los datos en el localStorage después de actualizar el estado
+      localStorage.setItem("favoriteCharacters", JSON.stringify(state));
+    },
+       removeFavoriteCharacter: (
+      state,
+      action: PayloadAction<RemoveFavoriteState>
+    ) => {
+      const { id } = action.payload;
+      // Add logic to handle removing a favorite character
+      if (state.some((item) => item.id === id)) {
+        return state.filter((item, index) => {
+          if (item.id === id) {
+            // Remove the item from the state
+            state.splice(index, 1);
+          }
+        });
+      }
+      // Guarda los datos en el localStorage después de actualizar el estado
+      localStorage.setItem("favoriteCharacters", JSON.stringify(state));
+    },
+
+   
+   */
+    removeFavoriteCharacter: (
+      state,
+      action: PayloadAction<RemoveFavoriteState>
+    ) => {
+      const { id } = action.payload;
+      const index = state.findIndex((item) => item.id === id);
+      if (index !== -1) {
+        state.splice(index, 1);
+      }
+      // Guarda los datos en el localStorage después de actualizar el estado
+      localStorage.setItem("favoriteCharacters", JSON.stringify(state));
     },
   },
 });
