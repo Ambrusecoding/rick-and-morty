@@ -13,8 +13,9 @@ interface RemoveFavoriteState {
 }
 
 // Define the initial state using that type
-const initialState: FavoriteState[] =
-  JSON.parse(localStorage.getItem("favoriteCharacters") ?? "") || [];
+const initialState: FavoriteState[] = JSON.parse(
+  localStorage.getItem("favoriteCharacters") ?? "[]"
+);
 
 export const favoriteCharacter = createSlice({
   name: "favorite",
