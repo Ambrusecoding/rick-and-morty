@@ -1,9 +1,11 @@
+import { ICharacter } from "../../characters/interface/character.interface";
+
 export interface TypeEpisodeDOM {
   id: number;
   name: string;
   airDate: string;
   episode: string;
-  characters: string[];
+  characters: ICharacter[];
   url: string;
   created: Date;
 }
