@@ -48,6 +48,10 @@ const HomePage = () => {
       });
   }, [page, filter]);
 
+  React.useEffect(() => {
+    setPage(1);
+  }, [filter]);
+
   const handleChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
