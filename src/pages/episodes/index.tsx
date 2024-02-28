@@ -31,6 +31,7 @@ const Episodes = () => {
                 <Grid item xs={12} sm={6} md={4} lg={3} key={episodes.id}>
                   <CardEpisode
                     key={episodes.id}
+                    id={episodes.id}
                     name={episodes.name}
                     airdate={episodes.airDate}
                     episode={episodes.episode}

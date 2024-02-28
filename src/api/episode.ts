@@ -1,3 +1,4 @@
+import { episodeAdapter } from "../adapters/episodeAdapters";
 import { ICharacter } from "../pages/characters/interface/character.interface";
 import { TypeEpisodeApi, TypeEpisodeDOM } from "../pages/episodes/interface";
 import { instance, BASE_URL } from "./base.api";
@@ -35,15 +36,12 @@ export const episodes = {
     const characters = await episodes.getCharactersByEpisode({
       ids: characterIds,
     });
-    const episodeDataDOM: TypeEpisodeDOM = {
-      id: episodeData.id,
-      name: episodeData.name,
-      airDate: episodeData.air_date,
-      episode: episodeData.episode,
-      characters: characters,
-      url: episodeData.url,
-      created: episodeData.created,
-    };
+
+    //Create adapter in episodeAdapters.ts
+    const episodeDataDOM: TypeEpisodeDOM = episodeAdapter(
+      episodeData,
+      characters
+    );
     return episodeDataDOM;
   },
 
