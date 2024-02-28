@@ -13,8 +13,10 @@ interface RemoveFavoriteState {
 }
 
 // Define the initial state using that type
+const FAVORITE_CHARACTERS_KEY = "favoriteCharacters";
+
 const initialState: FavoriteState[] = JSON.parse(
-  localStorage.getItem("favoriteCharacters") ?? "[]"
+  localStorage.getItem(FAVORITE_CHARACTERS_KEY) ?? "[]"
 );
 
 export const favoriteCharacter = createSlice({
@@ -70,12 +72,13 @@ export const favoriteCharacter = createSlice({
       action: PayloadAction<RemoveFavoriteState>
     ) => {
       const { id } = action.payload;
-      const index = state.findIndex((item) => item.id === id);
-      if (index !== -1) {
-        state.splice(index, 1);
+      const iCharacter = state.findIndex((item) => item.id === id);
+      if (iCharacter !== -1) {
+        state.splice(iCharacter, 1);
       }
+
       // Guarda los datos en el localStorage después de actualizar el estado
-      localStorage.setItem("favoriteCharacters", JSON.stringify(state));
+      localStorage.setItem(FAVORITE_CHARACTERS_KEY, JSON.stringify(state));
     },
   },
 });
