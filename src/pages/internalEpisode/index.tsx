@@ -1,5 +1,5 @@
 import { Box, CircularProgress, Container, Grid } from "@mui/material";
-import React from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { episodes } from "../../api/episode";
 import { TypeEpisodeDOM } from "../episodes/interface";
@@ -7,10 +7,10 @@ import { CardComponent } from "../../components/CardCharacter/Card";
 
 const EpisodeComponent = () => {
   const { id } = useParams();
-  const [loading, setLoading] = React.useState<boolean>(true);
-  const [episode, setEpisode] = React.useState<TypeEpisodeDOM | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [episode, setEpisode] = useState<TypeEpisodeDOM | null>(null);
 
-  React.useEffect(() => {
+  /* useEffect(() => {
     setLoading(true);
     episodes
       .getEpisodeById({ id })
@@ -20,6 +20,22 @@ const EpisodeComponent = () => {
         setTimeout(() => setLoading(false), 1000);
       })
       .catch((e) => console.log(e));
+  }, [id]);
+*/
+  //new form of useEffect
+  useEffect(() => {
+    const fetchEpisode = async () => {
+      try {
+        setLoading(true);
+        const data = await episodes.getEpisodeById({ id });
+        setEpisode(data);
+        setLoading(false), 1000;
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    fetchEpisode();
   }, [id]);
 
   return (
