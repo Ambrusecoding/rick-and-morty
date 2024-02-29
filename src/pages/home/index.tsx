@@ -3,7 +3,6 @@ import { characters } from "../../api/characters";
 import { CardComponent } from "../../components/CardCharacter/Card";
 import {
   Box,
-  CircularProgress,
   Container,
   Grid,
   Pagination,
@@ -13,6 +12,7 @@ import {
 } from "@mui/material";
 import { TypeCharacter } from "./interface/characters.interface";
 import SearchBar from "../../components/SearchBar";
+import { CardSkeleton } from "../../components/CardSkeleton/Card";
 
 const HomePage = () => {
   const [allCharacters, setAllcharacters] = React.useState<
@@ -62,11 +62,18 @@ const HomePage = () => {
       <Container sx={{ paddingBottom: "50px" }} maxWidth="xl">
         <SearchBar setFilter={setFilter} />
       </Container>
+
       <Container sx={{ paddingBottom: "50px" }} maxWidth="xl">
         {loading ? (
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <CircularProgress />
-          </Box>
+          [1, 2, 3, 4].map((item) => (
+            <Grid container spacing={5}>
+              {allCharacters?.map(() => (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={item}>
+                  <CardSkeleton />
+                </Grid>
+              ))}
+            </Grid>
+          ))
         ) : (
           <Box>
             {allCharacters?.length !== 0 ? (
