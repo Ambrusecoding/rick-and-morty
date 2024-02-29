@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { characters } from "../../api/characters";
 import { CardComponent } from "../../components/CardCharacter/Card";
 import {
@@ -28,7 +28,7 @@ const HomePage = () => {
     gender: "",
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     setLoading(true);
     characters
       .getAllCharacters({
@@ -60,12 +60,7 @@ const HomePage = () => {
         <Typography variant={matches ? "h4" : "h1"}>Personajes</Typography>
       </Box>
       <Container sx={{ paddingBottom: "50px" }} maxWidth="xl">
-        <SearchBar
-          setFilter={(newFilter) => {
-            setFilter(newFilter);
-            setPage(1);
-          }}
-        />
+        <SearchBar setFilter={setFilter} />
       </Container>
       <Container sx={{ paddingBottom: "50px" }} maxWidth="xl">
         {loading ? (
