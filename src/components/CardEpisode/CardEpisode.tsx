@@ -28,7 +28,16 @@ export const CardEpisode: React.FC<CardProps> = ({
   const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
   console.log("id", id);
   return (
-    <Card sx={{ borderRadius: "20px" }}>
+    <Card
+      sx={{
+        borderRadius: "20px",
+        minHeight: "420px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        paddingBottom: "20px",
+      }}
+    >
       <CardContent>
         <Typography variant={matches ? "h5" : "h4"}>{name}</Typography>
         <Divider sx={{ mt: 2 }} />
