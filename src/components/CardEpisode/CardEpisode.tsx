@@ -8,9 +8,10 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type CardProps = {
+  id: number;
   name: string;
   airdate: string;
   episode: string;
@@ -18,12 +19,14 @@ type CardProps = {
 };
 
 export const CardEpisode: React.FC<CardProps> = ({
+  id,
   name,
   airdate,
   episode,
 }) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
+  console.log("id", id);
   return (
     <Card sx={{ borderRadius: "20px" }}>
       <CardContent>
@@ -41,7 +44,7 @@ export const CardEpisode: React.FC<CardProps> = ({
       </CardContent>
       <CardActions>
         <Button
-          //  onClick={() => navigate(`/episode/${id}`)}
+          onClick={() => navigate(`/episode/${id}`)}
           fullWidth
           variant="contained"
           size="small"
