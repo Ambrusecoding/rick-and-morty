@@ -34,7 +34,7 @@ const Episodes = () => {
                     name={episodes.name}
                     airdate={episodes.airDate}
                     episode={episodes.episode}
-                    created={episodes.created}
+                    created={new Date(episodes.created)}
                   />
                 </Grid>
               ))}
