@@ -29,7 +29,7 @@ const Episodes = () => {
         <Typography variant={matches ? "h4" : "h1"}>Episodios</Typography>
       </Box>
 
-      <Container sx={{ paddingY: "50px" }} maxWidth="xl">
+      <Container sx={{ py: 6 }} maxWidth="xl">
         {loading ? (
           [1, 2, 3, 4].map((item) => (
             <Grid container spacing={5}>
@@ -62,7 +62,7 @@ const Episodes = () => {
             )}
             <Box
               sx={{
-                paddingTop: "50px",
+                pt: 6,
                 display: "flex",
                 justifyContent: "center",
                 mt: 2,
