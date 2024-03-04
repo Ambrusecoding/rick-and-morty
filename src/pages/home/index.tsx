@@ -1,9 +1,8 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { characters } from "../../api/characters";
 import { CardComponent } from "../../components/CardCharacter/Card";
 import {
   Box,
-  CircularProgress,
   Container,
   Grid,
   Pagination,
@@ -13,22 +12,23 @@ import {
 } from "@mui/material";
 import { TypeCharacter } from "./interface/characters.interface";
 import SearchBar from "../../components/SearchBar";
+import { CardSkeleton } from "../../components/CardSkeleton/Card";
 
 const HomePage = () => {
-  const [allCharacters, setAllcharacters] = React.useState<
-    TypeCharacter[] | null
-  >(null);
-  const [loading, setLoading] = React.useState<boolean>(true);
-  const [page, setPage] = React.useState(1);
-  const [count, setCount] = React.useState(1);
-  const [filter, setFilter] = React.useState({
+  const [allCharacters, setAllcharacters] = useState<TypeCharacter[] | null>(
+    null
+  );
+  const [loading, setLoading] = useState<boolean>(true);
+  const [page, setPage] = useState(1);
+  const [count, setCount] = useState(1);
+  const [filter, setFilter] = useState({
     name: "",
     status: "",
     species: "",
     gender: "",
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     setLoading(true);
     characters
       .getAllCharacters({
@@ -60,13 +60,25 @@ const HomePage = () => {
         <Typography variant={matches ? "h4" : "h1"}>Personajes</Typography>
       </Box>
       <Container sx={{ paddingBottom: "50px" }} maxWidth="xl">
-        <SearchBar setFilter={setFilter} />
+        <SearchBar
+          setFilter={(newFilter) => {
+            setFilter(newFilter);
+            setPage(1);
+          }}
+        />
       </Container>
+
       <Container sx={{ paddingBottom: "50px" }} maxWidth="xl">
         {loading ? (
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <CircularProgress />
-          </Box>
+          [1, 2, 3, 4].map((item) => (
+            <Grid container spacing={5}>
+              {allCharacters?.map(() => (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={item}>
+                  <CardSkeleton />
+                </Grid>
+              ))}
+            </Grid>
+          ))
         ) : (
           <Box>
             {allCharacters?.length !== 0 ? (
