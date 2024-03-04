@@ -9,7 +9,7 @@ export const EpisodeGetAllAdapter = (
       name: episode.name,
       airDate: episode.air_date,
       episode: episode.episode,
-      characters: episode.characters,
+      characters: [],
       url: episode.url,
       created: episode.created,
     };
