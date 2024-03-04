@@ -5,7 +5,7 @@ export interface TypeEpisodeDOM {
   episode: string;
   characters: string[];
   url: string;
-  created: Date;
+  created: string;
 }
 
 export interface TypeEpisodeApi {
