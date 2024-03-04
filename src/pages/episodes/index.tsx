@@ -21,6 +21,8 @@ const Episodes = () => {
   };
   const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
 
+  const noData = "No existe información para mostrar.";
+
   return (
     <>
       <Box sx={{ display: "flex", mt: 2, mb: 2, justifyContent: "center" }}>
@@ -56,7 +58,7 @@ const Episodes = () => {
                 ))}
               </Grid>
             ) : (
-              <div>No existe data</div>
+              <div>{noData}</div>
             )}
             <Box
               sx={{
