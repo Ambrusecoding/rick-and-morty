@@ -4,12 +4,14 @@ import CharacterComponent from "./pages/characters/index";
 import RouterLayout from "./common/RouterLayout";
 import BasicTabs from "./pages/testTab";
 import EpisodeComponent from "./pages/internalEpisode";
+export const ROUTES = {
+  HOME: "/",
+  ALL_EPISODES: "/episodes",
+  EPISODE: "/episode/:id",
+  CHARACTER_ID: "/characters/:id",
+  FAVORITES: "/favorites",
+};
 const AppRouter: React.FC = () => {
-  const ROUTES = {
-    ALL_EPISODES: "/episodes",
-    EPISODE: "/episode/:id",
-    CHARACTER_ID: "/characters/:id",
-  };
   return (
     <Routes>
       <Route path="/" element={<RouterLayout />}>

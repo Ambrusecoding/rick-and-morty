@@ -28,7 +28,6 @@ const Episodes = () => {
       <Box sx={{ display: "flex", mt: 2, mb: 2, justifyContent: "center" }}>
         <Typography variant={matches ? "h4" : "h1"}>Episodios</Typography>
       </Box>
-
       <Container sx={{ py: 6 }} maxWidth="xl">
         {loading ? (
           [1, 2, 3, 4].map((item) => (
