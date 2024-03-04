@@ -1,30 +1,16 @@
 import {
   AppBar,
-  Badge,
   Box,
   Button,
   Container,
   Grid,
-  IconButton,
   Stack,
   Toolbar,
-  Tooltip,
   Typography,
-  Zoom,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useAppSelector } from "../redux/hooks";
-import React from "react";
-import { FavoriteComponent } from "./Favorite/Favorite";
 
 const Navbar = () => {
-  const items = useAppSelector((state) => state.favoriteReducer);
-  const [open, setOpen] = React.useState<boolean>(false);
-  const handleStateViewDrawer = () => {
-    setOpen((state) => !state);
-  };
-
   return (
     <>
       <Box>
@@ -47,16 +33,6 @@ const Navbar = () => {
 
                 <Grid spacing={2} item>
                   <Stack spacing={2} direction="row">
-                    <IconButton
-                      color="primary"
-                      onClick={() => handleStateViewDrawer()}
-                    >
-                      <Badge color="info" badgeContent={items.length}>
-                        <Tooltip TransitionComponent={Zoom} title="Favoritos">
-                          <FavoriteIcon color="error" />
-                        </Tooltip>
-                      </Badge>
-                    </IconButton>
                     <Button variant="contained" color="primary">
                       {" "}
                       <Link to="/">Home</Link>
@@ -67,10 +43,6 @@ const Navbar = () => {
             </Container>
           </Toolbar>
         </AppBar>
-        <FavoriteComponent
-          open={open}
-          handleStateViewDrawer={handleStateViewDrawer}
-        />
       </Box>
     </>
   );

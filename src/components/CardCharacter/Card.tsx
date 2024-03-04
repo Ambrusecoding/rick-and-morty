@@ -22,6 +22,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addFavoriteCharacter } from "../../redux/slices/character.slice";
 import { useAppSelector } from "../../redux/hooks";
+import { useState } from "react";
+import { removeFavoriteCharacter } from "../../redux/slices/character.slice";
 
 type CardProps = {
   name: string;
@@ -43,6 +45,22 @@ export const CardComponent: React.FC<CardProps> = ({
   const navigate = useNavigate();
   const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
   const dispatch = useDispatch();
+
+  const handleRemoveFavorite = () => {
+    dispatch(removeFavoriteCharacter({ id }));
+  };
+
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  //Add and remove favorite
+  const handleClick = () => {
+    if (isFavorite) {
+      handleRemoveFavorite();
+    } else {
+      handleAddFavorite();
+    }
+    setIsFavorite(!isFavorite);
+  };
 
   const itemExist = useAppSelector((state) => state.favoriteReducer);
   /*Probé eliminarlo pero el botón quedaba en rojo  */
@@ -102,10 +120,7 @@ export const CardComponent: React.FC<CardProps> = ({
               )}
             </Box>
             <Box>
-              <Button
-                onClick={handleAddFavorite}
-                disabled={itemExist.some((item) => item.id === id)}
-              >
+              <Button onClick={handleClick}>
                 <Tooltip TransitionComponent={Zoom} title="Agregar a Favoritos">
                   <FavoriteIcon
                     color={

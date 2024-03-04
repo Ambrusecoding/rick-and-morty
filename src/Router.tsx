@@ -10,6 +10,7 @@ const AppRouter: React.FC = () => {
         <Route path="/" element={<BasicTabs value={0} />} />
         <Route path="/characters/:id" element={<CharacterComponent />} />
         <Route path="/episodes" element={<BasicTabs value={1} />} />
+        <Route path="/favorites" element={<BasicTabs value={2} />} />
       </Route>
     </Routes>
   );
