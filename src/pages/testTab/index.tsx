@@ -66,9 +66,9 @@ export default function BasicTabs({ value }: { value: number }) {
 */
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
-    if (newValue === 1) navigate(ROUTES.HOME);
-    if (newValue === 2) navigate(ROUTES.ALL_EPISODES);
-    if (newValue === 3) navigate(ROUTES.FAVORITES);
+    if (newValue === 0) navigate(ROUTES.HOME);
+    if (newValue === 1) navigate(ROUTES.ALL_EPISODES);
+    if (newValue === 2) navigate(ROUTES.FAVORITES);
   };
 
   /* Forma con arreglo de rutas

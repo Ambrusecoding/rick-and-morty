@@ -19,6 +19,7 @@ const AppRouter: React.FC = () => {
         <Route path={ROUTES.CHARACTER_ID} element={<CharacterComponent />} />
         <Route path={ROUTES.ALL_EPISODES} element={<BasicTabs value={1} />} />
         <Route path={ROUTES.EPISODE} element={<EpisodeComponent />} />
+        <Route path={ROUTES.FAVORITES} element={<BasicTabs value={2} />} />
       </Route>
     </Routes>
   );
