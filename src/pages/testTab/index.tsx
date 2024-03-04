@@ -8,6 +8,7 @@ import HomePage from "../home";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
 import { FavoriteCharacters } from "../../components/FavoriteCharacters/FavoriteCharacters";
+import { ROUTES } from "../../Router";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -45,6 +46,8 @@ function a11yProps(index: number) {
 export default function BasicTabs({ value }: { value: number }) {
   const navigate = useNavigate();
   const items = useAppSelector((state) => state.favoriteReducer);
+
+  /* Forma con switch
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     switch (newValue) {
       case 0:
@@ -60,6 +63,21 @@ export default function BasicTabs({ value }: { value: number }) {
         break;
     }
   };
+*/
+
+  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
+    if (newValue === 1) navigate(ROUTES.HOME);
+    if (newValue === 2) navigate(ROUTES.ALL_EPISODES);
+    if (newValue === 3) navigate(ROUTES.FAVORITES);
+  };
+
+  /* Forma con arreglo de rutas
+
+  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
+   const navigationRoutes = [Routes.HOME,Routes.EPISODES,Routes.FAVORITES]
+    navigate(navigationRoutes[newValue])
+}
+   */
 
   return (
     <Box sx={{ width: "100%" }}>

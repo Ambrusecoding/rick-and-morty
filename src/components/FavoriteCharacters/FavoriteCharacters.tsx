@@ -12,10 +12,12 @@ import { CardFavorite } from "../CardFavorite/CardFavorite";
 export const FavoriteCharacters = () => {
   const items = useAppSelector((state) => state.favoriteReducer);
   const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
+  const noFavCharacter = "No hay personajes favoritos seleccionados.";
+  const textFavorite = "Favoritos";
   return (
     <>
       <Box sx={{ display: "flex", mt: 2, mb: 2, justifyContent: "center" }}>
-        <Typography variant={matches ? "h4" : "h1"}>Favoritos</Typography>
+        <Typography variant={matches ? "h4" : "h1"}>{textFavorite}</Typography>
       </Box>
       <Container sx={{ paddingBottom: "50px" }} maxWidth="xl">
         <Box>
@@ -32,7 +34,7 @@ export const FavoriteCharacters = () => {
               ))}
             </Grid>
           ) : (
-            <div>No personajes favoritos seleccionados</div>
+            <div>{noFavCharacter}</div>
           )}
 
           <Box
