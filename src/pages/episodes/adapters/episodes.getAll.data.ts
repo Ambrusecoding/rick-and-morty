@@ -11,7 +11,7 @@ export const EpisodeGetAllAdapter = (
       episode: episode.episode,
       characters: episode.characters,
       url: episode.url,
-      created: episode.created.toString(), // Convierte 'created' a una cadena
+      created: episode.created,
     };
   });
 };
